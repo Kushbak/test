@@ -1,17 +1,19 @@
 const { Schema, model } = require('mongoose')
 
-const PostSchema = new Schema({
+const TodoSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
-  description: {
-    type: String,
-    required: true
+  isDone: {
+    type: Boolean,
+    required: false,
+    default: false
   },
 })
 
-PostSchema.set('toJSON', {
+TodoSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform: (doc, ret) => {
@@ -21,4 +23,4 @@ PostSchema.set('toJSON', {
   }
 })
 
-module.exports = model('Post', PostSchema)
+module.exports = model('Todo', TodoSchema)
