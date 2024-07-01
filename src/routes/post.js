@@ -23,12 +23,14 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:postId', async (req, res, next) => {
   try {
-    const body = res.body
-    const post = await Post.findById(req.params.id)
+    const body = req.body
+    const post = await Post.findById(req.params.postId)
+    console.log({ post, body }, req.postId)
     post.title = body.title
     post.description = body.description
+    await post.save()
     res.json(post)
   } catch(e) {
     console.log(e)
