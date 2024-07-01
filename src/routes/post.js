@@ -23,5 +23,18 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const body = res.body
+    const post = await Post.findById(req.params.id)
+    post.title = body.title
+    post.description = body.description
+    res.json(post)
+  } catch(e) {
+    console.log(e)
+    next(e)
+  }
+})
+
 
 module.exports = router
