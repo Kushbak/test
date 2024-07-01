@@ -10,6 +10,13 @@ const URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 
 const app = express()
 
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 app.use(bodyParser.json());
 app.use('/posts', postRouter)
 
