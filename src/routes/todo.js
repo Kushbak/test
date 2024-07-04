@@ -27,8 +27,12 @@ router.put('/:todoId', async (req, res, next) => {
   try {
     const body = req.body
     const post = await Todo.findById(req.params.todoId)
-    post.title = body.title
-    post.isDone = body.isDone
+    if(body.title !== undefined) {
+      post.title = body.title
+    }
+    if(body.isDone !== undefined) {
+      post.isDone = body.isDone
+    }
     await post.save()
     res.json(post)
   } catch(e) {
